@@ -1,0 +1,23 @@
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.status {
+    display: flex;
+    align-items: flex-end;
+    height: 3rem;
+}
+
+.status p {
+    font-size: .8rem;
+    margin-bottom: 0.2rem;
+}
+
+.input {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+    border: 1px solid #ddd;
+    outline: none;
+}
