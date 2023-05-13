@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Configuration, OpenAIApi } from 'openai';
-
-require('dotenv').config();
+import './App.css';
 
 const configuration = new Configuration({
 	organization: process.env.REACT_APP_OPENAI_ORG_ID,
@@ -15,13 +14,14 @@ function App() {
 	const [chats, setChats] = useState<string[]>([])
 	const [isTyping, setIsTyping] = useState<boolean>(false)
 
-	const chat = async (e: any, msg: string) => {
+	const chat = async (e: any) => {
 		e.preventDefault();
 
 		if (!msg) {
-			setIsTyping(true);
+			return;
 		}
 
+		setIsTyping((prev) => true);
 		await openai.createChatCompletion({
 			model: "gpt-3.5-turbo",
 			messages: [{ role: 'user', content: msg }]
@@ -31,16 +31,18 @@ function App() {
 		}).catch((e) => {
 			console.log(e);
 		})
+		setIsTyping((prev) => false);
 	}
 
 	return (
-		<div>
-			<div>
+		<div className='container'>
+			<div className='status'>
 				{isTyping && <p>Typing...</p>}
 			</div>
-			<form action="" onSubmit={(e) => chat(e, msg)}>
+			<form action="" onSubmit={(e) => chat(e)}>
 				<input
 					type="text"
+					className='input'
 					placeholder='Input a message'
 					onChange={(e) => setMsg(e.target.value)}
 				/>
