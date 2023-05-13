@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Configuration, OpenAIApi } from 'openai';
 
-require('dotenv').config();
-
 const configuration = new Configuration({
 	organization: process.env.REACT_APP_OPENAI_ORG_ID,
 	apiKey: process.env.REACT_APP_OPENAI_API_KEY
@@ -16,6 +14,7 @@ function App() {
 	const [isTyping, setIsTyping] = useState<boolean>(false)
 
 	const chat = async (e: any, msg: string) => {
+		console.log(msg);
 		e.preventDefault();
 
 		if (!msg) {
